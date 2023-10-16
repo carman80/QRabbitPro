@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-13 11:33:29
+ *  time: 2023-10-16 10:00:49
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vab-layouts"],{
 
@@ -160,16 +160,16 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push('/personalCenter/personalCenter');
     },
     async check_ver() {
-      const res = await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["GetVer"])();
-      const ver = res.version;
-      const new_res = await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["checkVer"])();
-      const new_ver = new_res.version;
+      let res = await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["GetVer"])();
+      let ver = res.version;
+      let new_res = await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["checkVer"])();
+      let new_ver = new_res.version;
       if (!new_ver) {
         this.$baseMessage('获取最新版本失败', 'error');
         return;
       }
-      const isBeta = ver.includes('-beta');
-      const new_ver_isBeta = new_ver.includes('-beta');
+      let isBeta = ver.includes('-beta');
+      let new_ver_isBeta = new_ver.includes('-beta');
       if (isBeta && new_ver_isBeta) {
         if (ver === new_ver) {
           this.$baseMessage('当前版本为最新版本', 'success');

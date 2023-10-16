@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-13 11:33:29
+ *  time: 2023-10-16 10:00:49
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
@@ -439,6 +439,7 @@ var render = function render() {
       align: "center",
       "cell-style": "0 0",
       "header-align": "center",
+      "show-overflow-tooltip": "",
       type: "selection",
       width: "30px"
     }
@@ -448,6 +449,7 @@ var render = function render() {
       "header-align": "center",
       label: "序号",
       prop: "id",
+      "show-overflow-tooltip": "",
       sortable: "",
       width: "80px"
     }
@@ -457,6 +459,7 @@ var render = function render() {
       "header-align": "center",
       label: "pin",
       prop: "pin",
+      "show-overflow-tooltip": "",
       sortable: "",
       width: "120px"
     }
@@ -466,6 +469,7 @@ var render = function render() {
       "header-align": "center",
       label: "昵称",
       prop: "nickname",
+      "show-overflow-tooltip": "",
       sortable: "",
       width: "120px"
     }
@@ -475,6 +479,7 @@ var render = function render() {
       "header-align": "center",
       label: "备注",
       prop: "remarks",
+      "show-overflow-tooltip": "",
       width: "100px"
     }
   }), _c("el-table-column", {
@@ -483,6 +488,7 @@ var render = function render() {
       "header-align": "center",
       label: "权重",
       prop: "priority",
+      "show-overflow-tooltip": "",
       sortable: "",
       width: "80px"
     }
@@ -492,6 +498,7 @@ var render = function render() {
       "header-align": "center",
       label: "UUID",
       prop: "uuid",
+      "show-overflow-tooltip": "",
       width: "120px"
     }
   }), _c("el-table-column", {
@@ -500,12 +507,13 @@ var render = function render() {
       "header-align": "center",
       label: "状态",
       prop: "expired",
+      "show-overflow-tooltip": "",
       width: "80px"
     },
     scopedSlots: _vm._u([{
       key: "default",
       fn: function (scope) {
-        return [_c("div", [scope.row.enabled ? _c("i", {
+        return [_c("div", [!scope.row.expired ? _c("i", {
           staticClass: "el-icon-success",
           staticStyle: {
             "font-size": "20px",
@@ -544,6 +552,7 @@ var render = function render() {
       "header-align": "center",
       label: "wskey",
       prop: "wskey",
+      "show-overflow-tooltip": "",
       width: "180px"
     }
   }), _c("el-table-column", {
@@ -552,6 +561,7 @@ var render = function render() {
       "header-align": "center",
       label: "Rwskey",
       prop: "rwskey",
+      "show-overflow-tooltip": "",
       width: "180px"
     }
   }), _c("el-table-column", {
@@ -560,6 +570,7 @@ var render = function render() {
       "header-align": "center",
       label: "更新时间",
       prop: "last_login_time",
+      "show-overflow-tooltip": "",
       sortable: "",
       width: "150px"
     }
