@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-16 14:56:49
+ *  time: 2023-10-16 19:22:57
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
@@ -560,7 +560,7 @@ var render = function render() {
       align: "center",
       "header-align": "center",
       label: "Rwskey",
-      prop: "rwskey",
+      prop: "jd_a2",
       "show-overflow-tooltip": "",
       width: "180px"
     }
