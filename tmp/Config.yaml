@@ -1,4 +1,4 @@
-RabbitToken: RabbitTest        # 机器人给的token
+RabbitToken:                                         # 机器人给的token
 MaxTab: 10                                           # 同时登陆的人数
 CloseTime: 180                                       # 页面回收时间
 username: admin                                      # 管理员的username
@@ -6,7 +6,7 @@ password: admin                                      # 管理员密码
 Title: QRabbit                                       # 标题
 mode: 2                                              # 公告
 ServerHost: 62.204.54.137:4566                       # 中心服务器host
-BotApiToken: 7b55b44947be4c23bd708774367ec985        # 对接机器人的认证token
+BotApiToken:                                         # 对接机器人的认证token
 WskeyCron: ''                                        # wskey的转换定时
 WskeyCronStatus: true                                # 是否开启wskey的转换
 SyncCkCron:                                          # 同步ck的定时
@@ -15,5 +15,5 @@ WXPUSHER_APP_TOKEN:                                  # 用于wxpusher通知的�
 WXPUSHER_UID:                                        # 接受wxpusher通知的uid
 REAL_CK: true                                        # 个人中心是否显示ck，默认不显示，开启这个开关可能会被偷家
 AutoCaptchaCount: 5                                  # 滑动验证次数
-TJ_username: '123'                                   # 图鉴的账号名
-TJ_password: '123'                                   # 图鉴账号密码
+TJ_username:                                         # 图鉴的账号名
+TJ_password:                                         # 图鉴账号密码

@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-16 10:00:49
+ *  time: 2023-10-16 14:56:49
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
@@ -42,7 +42,7 @@ __webpack_require__.r(__webpack_exports__);
     };
     const validatePassword = (rule, value, callback) => {
       if (!Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["isPassword"])(value)) {
-        callback(new Error('密码不能少于6位'));
+        callback(new Error('密码不能少于5位'));
       } else {
         callback();
       }
@@ -87,11 +87,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted() {
     this.form.username = 'admin';
-    this.form.password = 'abcxyz';
-    setTimeout(() => {
-      this.handleLogin();
-    }, 3000);
+    this.form.password = 'admin';
+    // setTimeout(() => {
+    //   this.handleLogin()
+    // }, 3000)
   },
+
   methods: {
     handlePassword() {
       this.passwordType === 'password' ? this.passwordType = '' : this.passwordType = 'password';

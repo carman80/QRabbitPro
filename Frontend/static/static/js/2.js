@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-16 10:00:49
+ *  time: 2023-10-16 14:56:49
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
@@ -450,7 +450,7 @@ var render = function render() {
     }
   }, [_c("el-input-number", {
     attrs: {
-      max: 20,
+      max: 20000,
       min: 1
     },
     model: {
@@ -466,7 +466,7 @@ var render = function render() {
     }
   }, [_c("el-input-number", {
     attrs: {
-      max: 20,
+      max: 20000,
       min: 1
     },
     model: {

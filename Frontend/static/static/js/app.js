@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-16 10:00:49
+ *  time: 2023-10-16 14:56:49
  */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
@@ -6382,7 +6382,7 @@ function isExternal(path) {
  * @returns {boolean}
  */
 function isPassword(str) {
-  return str.length >= 6;
+  return str.length >= 5;
 }
 
 /**
