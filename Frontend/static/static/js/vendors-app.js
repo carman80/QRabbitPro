@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-16 19:22:57
+ *  time: 2023-10-16 20:31:36
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vendors-app"],{
 
@@ -7066,7 +7066,7 @@ var _a;
 
 
 var version = typeof process !== 'undefined'
-    ? (_a = Object({"NODE_ENV":"procution","VUE_APP_AUTHOR":"Rabbit","VUE_APP_HTTP_URL":"http://127.0.0.1:1234","VUE_APP_MODE":"procution","VUE_APP_TITLE":"RabbitPro","VUE_APP_UPDATE_TIME":"2023-10-16 19:22:57","VUE_APP_VERSION":"2.4.0","BASE_URL":""})) === null || _a === void 0 ? void 0 : _a.npm_package_version
+    ? (_a = Object({"NODE_ENV":"procution","VUE_APP_AUTHOR":"Rabbit","VUE_APP_HTTP_URL":"http://127.0.0.1:1234","VUE_APP_MODE":"procution","VUE_APP_TITLE":"RabbitPro","VUE_APP_UPDATE_TIME":"2023-10-16 20:31:36","VUE_APP_VERSION":"2.4.0","BASE_URL":""})) === null || _a === void 0 ? void 0 : _a.npm_package_version
     : undefined;
 /**
  *

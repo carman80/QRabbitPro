@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-16 19:22:57
+ *  time: 2023-10-16 20:31:36
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
@@ -74,6 +74,7 @@ let raw_settings = {
         AutoCaptchaCount: 5,
         TJ_username: '',
         TJ_password: '',
+        GitProxy: '',
         mode: '2'
       },
       rules: {
@@ -499,6 +500,23 @@ var render = function render() {
         _vm.$set(_vm.ruleForm, "Title", $$v);
       },
       expression: "ruleForm.Title"
+    }
+  })], 1)], 1)], 1), _c("el-row", [_c("el-col", {
+    attrs: {
+      span: _vm.isMobile ? 24 : 12
+    }
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "拉库更新代理",
+      prop: "GitProxy"
+    }
+  }, [_c("el-input", {
+    model: {
+      value: _vm.ruleForm.GitProxy,
+      callback: function ($$v) {
+        _vm.$set(_vm.ruleForm, "GitProxy", $$v);
+      },
+      expression: "ruleForm.GitProxy"
     }
   })], 1)], 1)], 1), _c("el-row", [_c("el-col", {
     attrs: {
