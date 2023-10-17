@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-16 20:31:36
+ *  time: 2023-10-17 18:06:16
  */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
@@ -4398,7 +4398,7 @@ const setting = {
   //是否显示页面底部自定义版权信息
   footerCopyright: true,
   //是否显示顶部进度条
-  progressBar: true,
+  progressBar: false,
   //缓存路由的最大数量
   keepAliveMaxNum: 99,
   // 路由模式，可选值为 history 或 hash

@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-16 20:31:36
+ *  time: 2023-10-17 18:06:16
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
@@ -105,6 +105,42 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         await this.updateContainer();
       }
+    },
+    async importAll(id) {
+      // 一键导入
+      await this.$confirm('此操作将导入该青龙容器中的ck, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const loading = this.$loading({
+          lock: true,
+          text: '正在导入中，请稍等...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+        try {
+          let data = await Object(_api_container__WEBPACK_IMPORTED_MODULE_1__["import_all"])({
+            id
+          });
+          if (data.code == 400) {
+            this.$message.error(data.msg);
+          } else if (data.code == 500) {
+            this.$message.error(`${data.msg}\n原因：${data.reason}`);
+          } else {
+            this.$message.success(data.msg);
+          }
+          loading.close();
+        } catch (e) {
+          loading.close();
+          this.$message.error(e);
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消导入'
+        });
+      });
     },
     async updateContainer() {
       // 更新容器
@@ -259,6 +295,12 @@ var render = function render() {
               }
             }
           }, [_vm._v(" 删除 ")]), _c("el-dropdown-item", {
+            nativeOn: {
+              click: function ($event) {
+                return _vm.importAll(container.id);
+              }
+            }
+          }, [_vm._v(" 一键导入 ")]), _c("el-dropdown-item", {
             nativeOn: {
               click: function ($event) {
                 return _vm.changeContainerStauts(container.id);
@@ -590,7 +632,7 @@ if(false) {}
 /*!******************************!*\
   !*** ./src/api/container.js ***!
   \******************************/
-/*! exports provided: TestConnect, createContainer, getContainer, delContainer, updateContainer */
+/*! exports provided: TestConnect, createContainer, getContainer, delContainer, updateContainer, import_all */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -600,6 +642,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getContainer", function() { return getContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delContainer", function() { return delContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateContainer", function() { return updateContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "import_all", function() { return import_all; });
 /* harmony import */ var _utils_request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/utils/request */ "./src/utils/request.js");
 
 async function TestConnect(data) {
@@ -633,6 +676,13 @@ async function delContainer(data) {
 async function updateContainer(data) {
   return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
     url: '/container/update',
+    method: 'post',
+    data
+  });
+}
+async function import_all(data) {
+  return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    url: '/container/import_all',
     method: 'post',
     data
   });

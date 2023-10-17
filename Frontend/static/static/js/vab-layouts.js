@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-16 20:31:36
+ *  time: 2023-10-17 18:06:16
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vab-layouts"],{
 
@@ -142,6 +142,12 @@ __webpack_require__.r(__webpack_exports__);
       username: 'user/username'
     })
   },
+  data() {
+    return {
+      update_status: true,
+      update_msg: ''
+    };
+  },
   methods: {
     handleCommand(command) {
       switch (command) {
@@ -158,6 +164,27 @@ __webpack_require__.r(__webpack_exports__);
     },
     personalCenter() {
       this.$router.push('/personalCenter/personalCenter');
+    },
+    async update_ing() {
+      this.loading = this.$loading({
+        lock: true,
+        text: '正在更新中，请稍等...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      await this.check_update_status();
+    },
+    async check_update_status() {
+      setTimeout(async () => {
+        let res = await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["update"])();
+        if (!res.status) {
+          this.update_status = false;
+          this.update_msg = res.msg;
+          this.loading.close();
+        } else {
+          await this.check_update_status();
+        }
+      }, 1000);
     },
     async check_ver() {
       let res = await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["GetVer"])();
@@ -176,12 +203,13 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           this.$baseConfirm(`当前版本为测试版本，最新版本为：${new_ver}，是否更新到最新版本？`, null, async () => {
             await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["update"])();
+            await this.update_ing();
             this.$baseMessage('更新成功，6s后刷新页面', 'success');
             setTimeout(() => {
               window.location.reload();
             }, 6000);
           });
-          this.$baseMessage('当前版本为测试版本', 'warning');
+          this.$baseMessage('当前版本为测试版本', 'success');
         }
       }
       if (isBeta) {
@@ -189,13 +217,14 @@ __webpack_require__.r(__webpack_exports__);
         if (ver === new_ver) {
           this.$baseConfirm(`当前版本为测试版本，最新版本为：${new_ver}，是否更新到最新版本？`, null, async () => {
             await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["update"])();
+            await this.update_ing();
             this.$baseMessage('更新成功，6s后刷新页面', 'success');
             setTimeout(() => {
               window.location.reload();
             }, 6000);
           });
         } else {
-          this.$baseMessage('当前版本为测试版本', 'warning');
+          this.$baseMessage('当前版本为测试版本', 'success');
         }
       }
       if (ver === new_ver) {
@@ -203,6 +232,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.$baseConfirm(`最新版本为：${new_ver}，是否更新到最新版本？`, null, async () => {
           await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["update"])();
+          await this.update_ing();
           this.$baseMessage('更新成功，6s后刷新页面', 'success');
           setTimeout(() => {
             window.location.reload();

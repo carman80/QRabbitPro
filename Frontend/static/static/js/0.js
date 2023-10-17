@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-16 20:31:36
+ *  time: 2023-10-17 18:06:16
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
@@ -150,20 +150,15 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs['edit'].showEdit(row);
     },
     handleDelete(row) {
-      console.log(row);
-      query_form = {
-        container_id: this.container_id,
-        ...this.queryForm
-      };
       if (row.id) {
         this.$baseConfirm('你确定要删除当前项吗', null, async () => {
           var delete_form = {
             container_id: this.container_id,
-            ids: row.id
+            ids: [row.id]
           };
           const {
             msg
-          } = await doDelete(delete_form);
+          } = await Object(_api_env__WEBPACK_IMPORTED_MODULE_1__["doDelete"])(delete_form);
           this.$baseMessage(msg, 'success');
           this.fetchData();
         });
@@ -177,7 +172,7 @@ __webpack_require__.r(__webpack_exports__);
             };
             const {
               msg
-            } = await doDelete(delete_form);
+            } = await Object(_api_env__WEBPACK_IMPORTED_MODULE_1__["doDelete"])(delete_form);
             this.$baseMessage(msg, 'success');
             this.fetchData();
           });
@@ -393,15 +388,35 @@ var render = function render() {
       slot: "header"
     },
     slot: "header"
-  }, [_c("span", [_vm._v("变量列表")]), _c("el-button", {
+  }, [_c("span", [_vm._v("变量列表")]), _c("el-dropdown", {
     staticStyle: {
       float: "right",
       padding: "3px 0"
-    },
-    attrs: {
-      type: "text"
     }
-  }, [_vm._v(" 操作按钮 ")])], 1), _c("el-table", {
+  }, [_c("span", {
+    staticClass: "el-dropdown-link"
+  }, [_vm._v(" 操作按钮 "), _c("i", {
+    staticClass: "el-icon-arrow-down el-icon--right"
+  })]), _c("el-dropdown-menu", {
+    attrs: {
+      slot: "dropdown"
+    },
+    slot: "dropdown"
+  }, [_c("el-dropdown-item", {
+    nativeOn: {
+      click: function ($event) {
+        return _vm.handleDelete.apply(null, arguments);
+      }
+    }
+  }, [_vm._v(" 批量删除 ")]), _c("el-dropdown-item", {
+    attrs: {
+      disable: ""
+    }
+  }, [_vm._v("转移容器")]), _c("el-dropdown-item", {
+    attrs: {
+      disable: ""
+    }
+  }, [_vm._v("批量更新")])], 1)], 1)], 1), _c("el-table", {
     directives: [{
       name: "loading",
       rawName: "v-loading",
@@ -603,7 +618,13 @@ var render = function render() {
               return _vm.handleEdit(scope.row);
             }
           }
-        }, [_c("sapn", [_vm._v("修改")])], 1)], 1)], 1)];
+        }, [_c("sapn", [_vm._v("修改")])], 1), _c("el-dropdown-item", {
+          nativeOn: {
+            click: function ($event) {
+              return _vm.handleDelete(scope.row);
+            }
+          }
+        }, [_c("sapn", [_vm._v("删除")])], 1)], 1)], 1)];
       }
     }])
   })], 1), _c("el-pagination", {
@@ -639,7 +660,7 @@ render._withStripped = true;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.vab-query-form {\n  margin-bottom: 0;\n}\n.el-card .el-card__header {\n  padding: 10px 20px;\n  font-family: 'Avenir', 'Helvetica', 'Arial', sans-serif;\n  color: #606266;\n}\n.el-card .el-card__body {\n  padding: 10px 10px;\n}\n.el-table th.el-table__cell > .cell {\n  padding: 0 5px;\n}\n.clearfix {\n  overflow: hidden;\n  padding: 0px;\n}\n.el-table-column--selection .cell {\n  padding: 0 5px;\n}\n/* .el-table td.is-center {\n  padding: 5px 0;\n} */\n", ""]);
+exports.push([module.i, "\n.el-dropdown-link {\n  cursor: pointer;\n  color: #409eff;\n}\n.el-icon-arrow-down {\n  font-size: 12px;\n}\n.vab-query-form {\n  margin-bottom: 0;\n}\n.el-card .el-card__header {\n  padding: 10px 20px;\n  font-family: 'Avenir', 'Helvetica', 'Arial', sans-serif;\n  color: #606266;\n}\n.el-card .el-card__body {\n  padding: 10px 10px;\n}\n.el-table th.el-table__cell > .cell {\n  padding: 0 5px;\n}\n.clearfix {\n  overflow: hidden;\n  padding: 0px;\n}\n.el-table-column--selection .cell {\n  padding: 0 5px;\n}\n/* .el-table td.is-center {\n  padding: 5px 0;\n} */\n", ""]);
 // Exports
 module.exports = exports;
 
