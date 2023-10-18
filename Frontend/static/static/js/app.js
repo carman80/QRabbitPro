@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-17 18:06:16
+ *  time: 2023-10-18 16:42:45
  */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
@@ -4465,9 +4465,9 @@ const theme = {
   //横纵布局 horizontal vertical
   layout: 'vertical',
   //是否开启主题配置按钮
-  themeBar: true,
+  themeBar: false,
   //是否显示多标签页
-  tabsBar: true
+  tabsBar: false
 };
 module.exports = theme;
 

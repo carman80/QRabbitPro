@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-17 18:06:16
+ *  time: 2023-10-18 16:42:45
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
@@ -139,6 +139,76 @@ __webpack_require__.r(__webpack_exports__);
         this.$message({
           type: 'info',
           message: '已取消导入'
+        });
+      });
+    },
+    async updateAll(id) {
+      await this.$confirm('此操作将转换此容器中的所有ck,是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const loading = this.$loading({
+          lock: true,
+          text: '正在转换中，请稍等...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+        try {
+          let data = await Object(_api_container__WEBPACK_IMPORTED_MODULE_1__["update_all"])({
+            id
+          });
+          if (data.code == 400) {
+            this.$message.error(data.msg);
+          } else if (data.code == 500) {
+            this.$message.error(`${data.msg}\n原因：${data.reason}`);
+          } else {
+            this.$message.success(data.msg);
+          }
+          loading.close();
+        } catch (e) {
+          loading.close();
+          this.$message.error(e);
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消更新'
+        });
+      });
+    },
+    async syncAll(id) {
+      this.$confirm('此操作将同步此容器中的所有ck至青龙,是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const loading = this.$loading({
+          lock: true,
+          text: '正在同步中，请稍等...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+        try {
+          let data = await Object(_api_container__WEBPACK_IMPORTED_MODULE_1__["sync_all"])({
+            id
+          });
+          if (data.code == 400) {
+            this.$message.error(data.msg);
+          } else if (data.code == 500) {
+            this.$message.error(`${data.msg}\n原因：${data.reason}`);
+          } else {
+            this.$message.success(data.msg);
+          }
+          loading.close();
+        } catch (e) {
+          loading.close();
+          this.$message.error(e);
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消同步'
         });
       });
     },
@@ -297,16 +367,28 @@ var render = function render() {
           }, [_vm._v(" 删除 ")]), _c("el-dropdown-item", {
             nativeOn: {
               click: function ($event) {
+                return _vm.changeContainerStauts(container.id);
+              }
+            }
+          }, [_vm._v(" " + _vm._s(container.status ? "禁用" : "启用") + " ")]), _c("el-dropdown-item", {
+            nativeOn: {
+              click: function ($event) {
                 return _vm.importAll(container.id);
               }
             }
           }, [_vm._v(" 一键导入 ")]), _c("el-dropdown-item", {
             nativeOn: {
               click: function ($event) {
-                return _vm.changeContainerStauts(container.id);
+                return _vm.updateAll(container.id);
               }
             }
-          }, [_vm._v(" " + _vm._s(container.status ? "禁用" : "启用") + " ")])], 1)], 1)], 1)])];
+          }, [_vm._v(" 一键更新 ")]), _c("el-dropdown-item", {
+            nativeOn: {
+              click: function ($event) {
+                return _vm.syncAll(container.id);
+              }
+            }
+          }, [_vm._v(" 立即同步 ")])], 1)], 1)], 1)])];
         },
         proxy: true
       }], null, true)
@@ -632,7 +714,7 @@ if(false) {}
 /*!******************************!*\
   !*** ./src/api/container.js ***!
   \******************************/
-/*! exports provided: TestConnect, createContainer, getContainer, delContainer, updateContainer, import_all */
+/*! exports provided: TestConnect, createContainer, getContainer, delContainer, updateContainer, import_all, update_all, sync_all */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -643,6 +725,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delContainer", function() { return delContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateContainer", function() { return updateContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "import_all", function() { return import_all; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "update_all", function() { return update_all; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sync_all", function() { return sync_all; });
 /* harmony import */ var _utils_request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/utils/request */ "./src/utils/request.js");
 
 async function TestConnect(data) {
@@ -683,6 +767,20 @@ async function updateContainer(data) {
 async function import_all(data) {
   return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
     url: '/container/import_all',
+    method: 'post',
+    data
+  });
+}
+async function update_all(data) {
+  return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    url: '/container/update_all',
+    method: 'post',
+    data
+  });
+}
+async function sync_all(data) {
+  return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    url: '/container/sync_all',
     method: 'post',
     data
   });
