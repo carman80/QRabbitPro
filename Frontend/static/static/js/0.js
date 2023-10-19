@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-18 16:42:45
+ *  time: 2023-10-19 21:03:22
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
@@ -94,12 +94,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   data() {
     return {
+      moveBatchFormVisible: false,
       isMobile: false,
       select: '',
       container_list: [{
         name: '容器1',
         id: 1
       }],
+      container_id2: '',
       background: true,
       selectRows: '',
       elementLoadingText: '正在加载...',
@@ -181,6 +183,47 @@ __webpack_require__.r(__webpack_exports__);
           return false;
         }
       }
+    },
+    async updateBatch() {
+      if (this.selectRows.length > 0) {
+        this.$baseConfirm('你确定要更新选中项吗', null, async () => {
+          const ids = this.selectRows.map(item => item.id).join();
+          var delete_form = {
+            container_id: this.container_id,
+            ids: ids
+          };
+          const {
+            msg
+          } = await Object(_api_env__WEBPACK_IMPORTED_MODULE_1__["update_batch"])(delete_form);
+          this.$baseMessage(msg, 'success');
+          this.fetchData();
+        });
+      }
+    },
+    moveBatchConfirm() {
+      if (this.selectRows.length > 0) {
+        this.$baseConfirm('你确定要移动所有选中的ck吗?', null, async () => {
+          this.moveBatchFormVisible = true;
+        });
+      }
+    },
+    async moveBatch(container_id) {
+      const ids = this.selectRows.map(item => item.id).join();
+      var move_form = {
+        container_id: this.container_id,
+        ids: ids,
+        container_id2: container_id
+      };
+      try {
+        const {
+          msg
+        } = await Object(_api_env__WEBPACK_IMPORTED_MODULE_1__["move_batch"])(move_form);
+        this.$baseMessage(msg, 'success');
+        this.fetchData();
+      } catch (error) {
+        this.$baseMessage(error, 'error');
+      }
+      this.moveBatchFormVisible = false;
     },
     handleSizeChange(val) {
       this.queryForm.pageSize = val;
@@ -409,14 +452,18 @@ var render = function render() {
       }
     }
   }, [_vm._v(" 批量删除 ")]), _c("el-dropdown-item", {
-    attrs: {
-      disable: ""
+    nativeOn: {
+      click: function ($event) {
+        return _vm.moveBatchConfirm.apply(null, arguments);
+      }
     }
-  }, [_vm._v("转移容器")]), _c("el-dropdown-item", {
-    attrs: {
-      disable: ""
+  }, [_vm._v(" 转移容器 ")]), _c("el-dropdown-item", {
+    nativeOn: {
+      click: function ($event) {
+        return _vm.updateBatch.apply(null, arguments);
+      }
     }
-  }, [_vm._v("批量更新")])], 1)], 1)], 1), _c("el-table", {
+  }, [_vm._v(" 批量更新 ")])], 1)], 1)], 1), _c("el-table", {
     directives: [{
       name: "loading",
       rawName: "v-loading",
@@ -641,7 +688,58 @@ var render = function render() {
     }
   })], 1), _c("table-edit", {
     ref: "edit"
-  })], 1);
+  }), _c("el-dialog", {
+    attrs: {
+      title: "迁移",
+      visible: _vm.moveBatchFormVisible
+    },
+    on: {
+      "update:visible": function ($event) {
+        _vm.moveBatchFormVisible = $event;
+      }
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "请选择容器"
+    },
+    model: {
+      value: _vm.container_id2,
+      callback: function ($$v) {
+        _vm.container_id2 = $$v;
+      },
+      expression: "container_id2"
+    }
+  }, _vm._l(_vm.container_list, function (item) {
+    return _c("el-option", {
+      key: item,
+      attrs: {
+        label: item.name,
+        size: "mini",
+        value: item.id
+      }
+    });
+  }), 1), _c("div", {
+    staticClass: "dialog-footer",
+    attrs: {
+      slot: "footer"
+    },
+    slot: "footer"
+  }, [_c("el-button", {
+    on: {
+      click: function ($event) {
+        _vm.moveBatchFormVisible = false;
+      }
+    }
+  }, [_vm._v("取 消")]), _c("el-button", {
+    attrs: {
+      type: "primary"
+    },
+    on: {
+      click: function ($event) {
+        return _vm.moveBatch(_vm.container_id2);
+      }
+    }
+  }, [_vm._v(" 确 定 ")])], 1)], 1)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -693,7 +791,7 @@ if(false) {}
 /*!************************!*\
   !*** ./src/api/env.js ***!
   \************************/
-/*! exports provided: getList, doDelete, doEdit, getContainerList */
+/*! exports provided: getList, doDelete, doEdit, getContainerList, update_batch, move_batch */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -702,6 +800,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doDelete", function() { return doDelete; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doEdit", function() { return doEdit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getContainerList", function() { return getContainerList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "update_batch", function() { return update_batch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "move_batch", function() { return move_batch; });
 /* harmony import */ var _utils_request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/utils/request */ "./src/utils/request.js");
 
 async function getList(data) {
@@ -728,6 +828,20 @@ async function doEdit(data) {
 async function getContainerList(data) {
   return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
     url: '/env/container_list',
+    method: 'post',
+    data
+  });
+}
+async function update_batch(data) {
+  return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    url: '/env/update_batch',
+    method: 'post',
+    data
+  });
+}
+async function move_batch(data) {
+  return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    url: '/env/move_batch',
     method: 'post',
     data
   });

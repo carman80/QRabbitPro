@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-18 16:42:45
+ *  time: 2023-10-19 21:03:22
  */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
@@ -4255,11 +4255,11 @@ const network = {
   //消息框消失时间
   messageDuration: 3000,
   //最长请求时间
-  requestTimeout: 5000,
+  requestTimeout: 60000,
   //操作正常code，支持String、Array、int多种类型
   successCode: [200, 0, undefined],
   //登录失效code
-  invalidCode: 402,
+  invalidCode: 401,
   //无权限code
   noPermissionCode: 401
 };
@@ -5538,6 +5538,10 @@ const actions = {
   }, userInfo) {
     const data = await Object(_api_user__WEBPACK_IMPORTED_MODULE_1__["login"])(userInfo);
     // const { data } = await login(userInfo)
+    if (data.code == 401) {
+      vue__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.$baseMessage(data.msg, 'error');
+      return false;
+    }
     const accessToken = data['access_token'];
     if (accessToken) {
       commit('setAccessToken', accessToken);
@@ -5957,7 +5961,7 @@ function convertRouter(asyncRoutes) {
       } else {
         const index = route.component.indexOf('views');
         const path = index > 0 ? route.component.slice(index) : `views/${route.component}`;
-        route.component = resolve => Promise.all(/*! AMD require */[__webpack_require__.e(6), __webpack_require__.e(2), __webpack_require__.e(5), __webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(3), __webpack_require__.e(7)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__("./src sync recursive ^\\.\\/.*$")(`./${path}`)]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+        route.component = resolve => Promise.all(/*! AMD require */[__webpack_require__.e(6), __webpack_require__.e(2), __webpack_require__.e(0), __webpack_require__.e(5), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(3), __webpack_require__.e(7)]).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__("./src sync recursive ^\\.\\/.*$")(`./${path}`)]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
       }
     }
     if (route.children && route.children.length) route.children = convertRouter(route.children);
