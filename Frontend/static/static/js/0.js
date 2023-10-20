@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-19 21:03:22
+ *  time: 2023-10-20 16:33:26
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
@@ -247,6 +247,11 @@ __webpack_require__.r(__webpack_exports__);
         data,
         total
       } = await Object(_api_env__WEBPACK_IMPORTED_MODULE_1__["getList"])(query_form);
+      // 添加一下序号，同时隐藏id
+      let start_index = (this.queryForm.pageNo - 1) * this.queryForm.pageSize + 1;
+      data.forEach((item, index) => {
+        item.index = start_index + index;
+      });
       this.tableData = data;
       this.total = total;
       setTimeout(() => {
@@ -510,7 +515,7 @@ var render = function render() {
       align: "center",
       "header-align": "center",
       label: "序号",
-      prop: "id",
+      prop: "index",
       "show-overflow-tooltip": "",
       sortable: "",
       width: "80px"
