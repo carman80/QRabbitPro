@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-20 16:33:26
+ *  time: 2023-10-21 22:45:39
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
@@ -199,6 +199,31 @@ __webpack_require__.r(__webpack_exports__);
           this.fetchData();
         });
       }
+    },
+    copyBatchConfirm() {
+      if (this.selectRows.length > 0) {
+        this.$baseConfirm('你确定要移动所有选中的ck吗?', null, async () => {
+          this.copyBatchFormVisible = true;
+        });
+      }
+    },
+    async copyBatch(container_id) {
+      const ids = this.selectRows.map(item => item.id).join();
+      var copy_form = {
+        container_id: this.container_id,
+        ids: ids,
+        container_id2: container_id
+      };
+      try {
+        const {
+          msg
+        } = await copy_batch(copy_form);
+        this.$baseMessage(msg, 'success');
+        this.fetchData();
+      } catch (error) {
+        this.$baseMessage(error, 'error');
+      }
+      this.copyBatchFormVisible = false;
     },
     moveBatchConfirm() {
       if (this.selectRows.length > 0) {
@@ -468,7 +493,13 @@ var render = function render() {
         return _vm.updateBatch.apply(null, arguments);
       }
     }
-  }, [_vm._v(" 批量更新 ")])], 1)], 1)], 1), _c("el-table", {
+  }, [_vm._v(" 批量更新 ")]), _c("el-dropdown-item", {
+    nativeOn: {
+      click: function ($event) {
+        return _vm.copyBatch.apply(null, arguments);
+      }
+    }
+  }, [_vm._v(" 批量复制 ")])], 1)], 1)], 1), _c("el-table", {
     directives: [{
       name: "loading",
       rawName: "v-loading",
@@ -742,6 +773,58 @@ var render = function render() {
     on: {
       click: function ($event) {
         return _vm.moveBatch(_vm.container_id2);
+      }
+    }
+  }, [_vm._v(" 确 定 ")])], 1)], 1), _c("el-dialog", {
+    attrs: {
+      title: "复制",
+      visible: _vm.copyBatchFormVisible
+    },
+    on: {
+      "update:visible": function ($event) {
+        _vm.copyBatchFormVisible = $event;
+      }
+    }
+  }, [_c("el-select", {
+    attrs: {
+      label: "容器",
+      placeholder: "请选择容器"
+    },
+    model: {
+      value: _vm.container_id2,
+      callback: function ($$v) {
+        _vm.container_id2 = $$v;
+      },
+      expression: "container_id2"
+    }
+  }, _vm._l(_vm.container_list, function (item) {
+    return _c("el-option", {
+      key: item,
+      attrs: {
+        label: item.name,
+        size: "mini",
+        value: item.id
+      }
+    });
+  }), 1), _c("div", {
+    staticClass: "dialog-footer",
+    attrs: {
+      slot: "footer"
+    },
+    slot: "footer"
+  }, [_c("el-button", {
+    on: {
+      click: function ($event) {
+        _vm.moveBatchFormVisible = false;
+      }
+    }
+  }, [_vm._v("取 消")]), _c("el-button", {
+    attrs: {
+      type: "primary"
+    },
+    on: {
+      click: function ($event) {
+        return _vm.copyBatch(_vm.container_id2);
       }
     }
   }, [_vm._v(" 确 定 ")])], 1)], 1)], 1);

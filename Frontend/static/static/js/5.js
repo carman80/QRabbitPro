@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-20 16:33:26
+ *  time: 2023-10-21 22:45:39
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
@@ -40,6 +40,8 @@ let raw_settings = {
   WskeyCronStatus: false,
   SyncCkCron: '',
   SyncCkCronStatus: false,
+  CheckCkCron: '',
+  CheckCkCronStatus: false,
   WXPUSHER_APP_TOKEN: '',
   WXPUSHER_UID: false,
   REAL_CK: '',
@@ -68,6 +70,8 @@ let raw_settings = {
         WskeyCronStatus: false,
         SyncCkCron: '',
         SyncCkCronStatus: false,
+        CheckCkCron: '',
+        CheckCkCronStatus: false,
         WXPUSHER_APP_TOKEN: '',
         WXPUSHER_UID: '',
         REAL_CK: false,
@@ -182,6 +186,23 @@ let raw_settings = {
         SyncCkCron: [{
           required: false,
           message: '定时同步CK',
+          trigger: 'blur'
+        }, {
+          validator: async (rule, value, callback) => {
+            if (value) {
+              if (Object(cron_validator__WEBPACK_IMPORTED_MODULE_3__["isValidCron"])(value)) {
+                callback();
+              } else {
+                callback(new Error('请输入正确的Cron表达式'));
+              }
+            } else {
+              callback();
+            }
+          }
+        }],
+        CheckCkCron: [{
+          required: false,
+          message: '定时检测ck',
           trigger: 'blur'
         }, {
           validator: async (rule, value, callback) => {
@@ -541,12 +562,14 @@ var render = function render() {
     }
   }, [_c("el-form-item", {
     attrs: {
-      label: "转换Cron状态"
+      label: "转换Cron状态："
     }
   }, [_c("el-switch", {
     attrs: {
       "active-color": "#13ce66",
-      "inactive-color": "#ff4949"
+      "active-text": "开启",
+      "inactive-color": "#ff4949",
+      "inactive-text": "关闭"
     },
     model: {
       value: _vm.ruleForm.WskeyCronStatus,
@@ -578,12 +601,14 @@ var render = function render() {
     }
   }, [_c("el-form-item", {
     attrs: {
-      label: "同步CK状态"
+      label: "同步CK状态："
     }
   }, [_c("el-switch", {
     attrs: {
       "active-color": "#13ce66",
-      "inactive-color": "#ff4949"
+      "active-text": "开启",
+      "inactive-color": "#ff4949",
+      "inactive-text": "关闭"
     },
     model: {
       value: _vm.ruleForm.SyncCkCronStatus,
@@ -591,6 +616,45 @@ var render = function render() {
         _vm.$set(_vm.ruleForm, "SyncCkCronStatus", $$v);
       },
       expression: "ruleForm.SyncCkCronStatus"
+    }
+  })], 1)], 1)], 1), _c("el-row", [_c("el-col", {
+    attrs: {
+      span: _vm.isMobile ? 24 : 12
+    }
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "检测ck",
+      prop: "SyncCkCron"
+    }
+  }, [_c("el-input", {
+    model: {
+      value: _vm.ruleForm.CheckCkCron,
+      callback: function ($$v) {
+        _vm.$set(_vm.ruleForm, "CheckCkCron", $$v);
+      },
+      expression: "ruleForm.CheckCkCron"
+    }
+  })], 1)], 1), _c("el-col", {
+    attrs: {
+      span: _vm.isMobile ? 24 : 12
+    }
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "检测CK状态："
+    }
+  }, [_c("el-switch", {
+    attrs: {
+      "active-color": "#13ce66",
+      "active-text": "开启",
+      "inactive-color": "#ff4949",
+      "inactive-text": "关闭"
+    },
+    model: {
+      value: _vm.ruleForm.CheckCkCronStatus,
+      callback: function ($$v) {
+        _vm.$set(_vm.ruleForm, "CheckCkCronStatus", $$v);
+      },
+      expression: "ruleForm.CheckCkCronStatus"
     }
   })], 1)], 1)], 1), _c("el-row", [_c("el-col", {
     attrs: {
@@ -618,12 +682,14 @@ var render = function render() {
     }
   }, [_c("el-form-item", {
     attrs: {
-      label: "复制ck"
+      label: "复制ck："
     }
   }, [_c("el-switch", {
     attrs: {
       "active-color": "#13ce66",
-      "inactive-color": "#ff4949"
+      "active-text": "开启",
+      "inactive-color": "#ff4949",
+      "inactive-text": "关闭"
     },
     model: {
       value: _vm.ruleForm.REAL_CK,

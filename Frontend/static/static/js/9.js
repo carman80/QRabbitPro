@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-20 16:33:26
+ *  time: 2023-10-21 22:45:39
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 

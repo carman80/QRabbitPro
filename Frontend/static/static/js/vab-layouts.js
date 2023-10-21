@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-20 16:33:26
+ *  time: 2023-10-21 22:45:39
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vab-layouts"],{
 
@@ -177,7 +177,7 @@ __webpack_require__.r(__webpack_exports__);
     async check_update_status() {
       setTimeout(async () => {
         let res = await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["update"])();
-        if (!res.status) {
+        if (!res.code) {
           this.update_status = false;
           this.update_msg = res.msg;
           this.loading.close();

@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-20 16:33:26
+ *  time: 2023-10-21 22:45:39
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
@@ -212,6 +212,41 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
+    async checkAll(id) {
+      this.$confirm('此操作将检测此容器中的所有ck,是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const loading = this.$loading({
+          lock: true,
+          text: '正在检测中，请稍等...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+        try {
+          let data = await Object(_api_container__WEBPACK_IMPORTED_MODULE_1__["check_all"])({
+            id
+          });
+          if (data.code == 400) {
+            this.$message.error(data.msg);
+          } else if (data.code == 500) {
+            this.$message.error(`${data.msg}\n原因：${data.reason}`);
+          } else {
+            this.$message.success(data.msg);
+          }
+          loading.close();
+        } catch (e) {
+          loading.close();
+          this.$message.error(e);
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消检测'
+        });
+      });
+    },
     async updateContainer() {
       // 更新容器
       let data = await Object(_api_container__WEBPACK_IMPORTED_MODULE_1__["updateContainer"])(this.new_container);
@@ -388,7 +423,13 @@ var render = function render() {
                 return _vm.syncAll(container.id);
               }
             }
-          }, [_vm._v(" 立即同步 ")])], 1)], 1)], 1)])];
+          }, [_vm._v(" 立即同步 ")]), _c("el-dropdown-item", {
+            nativeOn: {
+              click: function ($event) {
+                return _vm.checkAll(container.id);
+              }
+            }
+          }, [_vm._v(" 检测ck ")])], 1)], 1)], 1)])];
         },
         proxy: true
       }], null, true)
@@ -714,7 +755,7 @@ if(false) {}
 /*!******************************!*\
   !*** ./src/api/container.js ***!
   \******************************/
-/*! exports provided: TestConnect, createContainer, getContainer, delContainer, updateContainer, import_all, update_all, sync_all */
+/*! exports provided: TestConnect, createContainer, getContainer, delContainer, updateContainer, import_all, update_all, sync_all, check_all */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -727,6 +768,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "import_all", function() { return import_all; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "update_all", function() { return update_all; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sync_all", function() { return sync_all; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "check_all", function() { return check_all; });
 /* harmony import */ var _utils_request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/utils/request */ "./src/utils/request.js");
 
 async function TestConnect(data) {
@@ -781,6 +823,13 @@ async function update_all(data) {
 async function sync_all(data) {
   return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
     url: '/container/sync_all',
+    method: 'post',
+    data
+  });
+}
+async function check_all(data) {
+  return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    url: '/container/check_all',
     method: 'post',
     data
   });
