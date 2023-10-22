@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-21 22:45:39
+ *  time: 2023-10-22 22:39:12
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
@@ -161,8 +161,8 @@ let raw_settings = {
           message: '机器人对接Token',
           trigger: 'blur'
         }, {
-          min: 32,
-          max: 32,
+          min: 14,
+          max: 40,
           message: '长度为32个字符',
           trigger: 'blur'
         }],

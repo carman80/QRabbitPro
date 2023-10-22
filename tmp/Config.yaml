@@ -11,9 +11,12 @@ WskeyCron: ''                                        # wskey的转换定时
 WskeyCronStatus: true                                # 是否开启wskey的转换
 SyncCkCron:                                          # 同步ck的定时
 SyncCkCronStatus: true                               # 是否开启同步ck
+CheckCkCron:                                         # 检测ck的定时
+CheckCkCronStatus: true                              # 是否开启检测ck
 WXPUSHER_APP_TOKEN:                                  # 用于wxpusher通知的自己token
 WXPUSHER_UID:                                        # 接受wxpusher通知的uid
 REAL_CK: true                                        # 个人中心是否显示ck，默认不显示，开启这个开关可能会被偷家
 AutoCaptchaCount: 5                                  # 滑动验证次数
 TJ_username:                                         # 图鉴的账号名
 TJ_password:                                         # 图鉴账号密码
+GitProxy:                                            # 拉库代理

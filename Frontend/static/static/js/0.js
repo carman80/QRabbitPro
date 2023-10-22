@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-21 22:45:39
+ *  time: 2023-10-22 22:39:12
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
@@ -95,6 +95,7 @@ __webpack_require__.r(__webpack_exports__);
   data() {
     return {
       moveBatchFormVisible: false,
+      copyBatchFormVisible: false,
       isMobile: false,
       select: '',
       container_list: [{
@@ -202,7 +203,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     copyBatchConfirm() {
       if (this.selectRows.length > 0) {
-        this.$baseConfirm('你确定要移动所有选中的ck吗?', null, async () => {
+        this.$baseConfirm('你确定要复制所有选中的ck吗?', null, async () => {
           this.copyBatchFormVisible = true;
         });
       }
@@ -217,7 +218,7 @@ __webpack_require__.r(__webpack_exports__);
       try {
         const {
           msg
-        } = await copy_batch(copy_form);
+        } = await Object(_api_env__WEBPACK_IMPORTED_MODULE_1__["copy_batch"])(copy_form);
         this.$baseMessage(msg, 'success');
         this.fetchData();
       } catch (error) {
@@ -496,7 +497,7 @@ var render = function render() {
   }, [_vm._v(" 批量更新 ")]), _c("el-dropdown-item", {
     nativeOn: {
       click: function ($event) {
-        return _vm.copyBatch.apply(null, arguments);
+        return _vm.copyBatchConfirm.apply(null, arguments);
       }
     }
   }, [_vm._v(" 批量复制 ")])], 1)], 1)], 1), _c("el-table", {
@@ -734,7 +735,7 @@ var render = function render() {
         _vm.moveBatchFormVisible = $event;
       }
     }
-  }, [_c("el-select", {
+  }, [_c("span", [_vm._v("容器:")]), _c("el-select", {
     attrs: {
       placeholder: "请选择容器"
     },
@@ -785,7 +786,7 @@ var render = function render() {
         _vm.copyBatchFormVisible = $event;
       }
     }
-  }, [_c("el-select", {
+  }, [_c("span", [_vm._v("容器:")]), _c("el-select", {
     attrs: {
       label: "容器",
       placeholder: "请选择容器"
@@ -879,7 +880,7 @@ if(false) {}
 /*!************************!*\
   !*** ./src/api/env.js ***!
   \************************/
-/*! exports provided: getList, doDelete, doEdit, getContainerList, update_batch, move_batch */
+/*! exports provided: getList, doDelete, doEdit, getContainerList, update_batch, move_batch, copy_batch */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -890,6 +891,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getContainerList", function() { return getContainerList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "update_batch", function() { return update_batch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "move_batch", function() { return move_batch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copy_batch", function() { return copy_batch; });
 /* harmony import */ var _utils_request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/utils/request */ "./src/utils/request.js");
 
 async function getList(data) {
@@ -930,6 +932,13 @@ async function update_batch(data) {
 async function move_batch(data) {
   return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
     url: '/env/move_batch',
+    method: 'post',
+    data
+  });
+}
+async function copy_batch(data) {
+  return Object(_utils_request__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    url: '/env/copy_batch',
     method: 'post',
     data
   });
