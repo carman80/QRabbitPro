@@ -15,5 +15,5 @@ sanic_openapi
 qrcode
 tzlocal
 httpx
-opencv-python-headless
+opencv-python-headless<4.3
 fake-useragent
