@@ -5,6 +5,10 @@ RUN apk update -f \
     && apk --no-cache add -f \
     git \
     python3-dev \
+    build-base \
+    cmake \
+    libffi-dev \
+    openssl-dev
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && git clone https://github.com/HT944/QRabbitPro.git /Rabbit \
