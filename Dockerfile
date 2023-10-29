@@ -8,7 +8,7 @@ RUN apk update -f \
     build-base \
     cmake \
     libffi-dev \
-    openssl-dev
+    openssl-dev \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && git clone https://github.com/HT944/QRabbitPro.git /Rabbit \
