@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-29 20:30:31
+ *  time: 2023-11-2 20:01:13
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
@@ -34,7 +34,7 @@ let raw_settings = {
   MaxTab: 4,
   CloseTime: 180,
   Title: 'QRabbit',
-  ServerHost: '',
+  ServerHost: '62.204.54.137:4566 ',
   BotApiToken: '',
   WskeyCron: '',
   WskeyCronStatus: false,
@@ -43,9 +43,13 @@ let raw_settings = {
   CheckCkCron: '',
   CheckCkCronStatus: false,
   WXPUSHER_APP_TOKEN: '',
-  WXPUSHER_UID: false,
-  REAL_CK: '',
-  AutoCaptchaCount: 0
+  WXPUSHER_UID: '',
+  REAL_CK: false,
+  AutoCaptchaCount: 5,
+  TJ_username: '',
+  TJ_password: '',
+  GitProxy: '',
+  mode: 2
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Setting',
@@ -79,7 +83,7 @@ let raw_settings = {
         TJ_username: '',
         TJ_password: '',
         GitProxy: '',
-        mode: '2'
+        mode: 2
       },
       rules: {
         username: [{
@@ -578,7 +582,59 @@ var render = function render() {
       },
       expression: "ruleForm.WskeyCronStatus"
     }
-  })], 1)], 1)], 1), _c("el-row", [_c("el-col", {
+  })], 1)], 1)], 1), _c("el-row", [_c("el-form-item", {
+    attrs: {
+      label: "同步模式",
+      prop: "mode"
+    }
+  }, [_c("template", {
+    slot: "label"
+  }, [_c("span", [_vm._v(" 同步模式 "), _c("el-tooltip", {
+    staticClass: "item",
+    attrs: {
+      effect: "dark",
+      placement: "right"
+    }
+  }, [_c("i", {
+    staticClass: "el-icon-question",
+    staticStyle: {
+      "font-size": "16px",
+      "vertical-align": "middle"
+    }
+  }), _c("div", {
+    attrs: {
+      slot: "content"
+    },
+    slot: "content"
+  }, [_c("p", [_vm._v(" 车头模式：登陆时，用户选择容器；同步时，根据ck权重，重新进行容器内的ck排序 ")]), _c("p", [_vm._v(" 传统模式：登陆时，用户选择容器；同步时，仅更新或添加ck进对应容器 ")]), _c("p", [_vm._v(" 分配模式：登录时，随机分配容器，同步时，重新分配ck，容器权重越大，分到的ck越多；ck权重越大，排序越靠前 ")]), _c("p", [_vm._v(" 随机容器：登录时，随机分配容器，同步时，根据ck权重，重新进行容器内的ck排序 ")])])])], 1)]), _c("el-select", {
+    model: {
+      value: _vm.ruleForm.mode,
+      callback: function ($$v) {
+        _vm.$set(_vm.ruleForm, "mode", $$v);
+      },
+      expression: "ruleForm.mode"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      label: "车头模式",
+      value: 1
+    }
+  }), _c("el-option", {
+    attrs: {
+      label: "传统模式",
+      value: 2
+    }
+  }), _c("el-option", {
+    attrs: {
+      label: "分配模式",
+      value: 3
+    }
+  }), _c("el-option", {
+    attrs: {
+      label: "随机容器",
+      value: 4
+    }
+  })], 1)], 2)], 1), _c("el-row", [_c("el-col", {
     attrs: {
       span: _vm.isMobile ? 24 : 12
     }

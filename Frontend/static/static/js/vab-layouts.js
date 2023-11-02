@@ -2,7 +2,7 @@
  *  build: vue-admin-better 
  *  vue-admin-beautiful.com 
  *  https://gitee.com/chu1204505056/vue-admin-better 
- *  time: 2023-10-29 20:30:31
+ *  time: 2023-11-2 20:01:13
  */
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vab-layouts"],{
 
@@ -181,6 +181,10 @@ __webpack_require__.r(__webpack_exports__);
           this.update_status = false;
           this.update_msg = res.msg;
           this.loading.close();
+          this.$baseMessage('更新成功，6s后刷新页面', 'success');
+          setTimeout(() => {
+            window.location.reload();
+          }, 6000);
         } else {
           await this.check_update_status();
         }
@@ -205,10 +209,6 @@ __webpack_require__.r(__webpack_exports__);
           this.$baseConfirm(`当前版本为:${ver}，最新版本为：${new_ver}，是否更新到最新版本？`, null, async () => {
             await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["update"])();
             await this.update_ing();
-            this.$baseMessage('更新成功，6s后刷新页面', 'success');
-            setTimeout(() => {
-              window.location.reload();
-            }, 6000);
           });
           this.$baseMessage('当前版本为测试版本', 'success');
         }
@@ -218,10 +218,6 @@ __webpack_require__.r(__webpack_exports__);
           this.$baseConfirm(`当前版本为:${ver}，最新版本为：${new_ver}，是否更新到最新版本？`, null, async () => {
             await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["update"])();
             await this.update_ing();
-            this.$baseMessage('更新成功，6s后刷新页面', 'success');
-            setTimeout(() => {
-              window.location.reload();
-            }, 6000);
           });
         } else {
           this.$baseMessage(`当前版本为:${ver}`, 'success');
@@ -236,10 +232,6 @@ __webpack_require__.r(__webpack_exports__);
           this.$baseConfirm(`当前版本为:${ver}，最新版本为：${new_ver}，是否更新到最新版本？`, null, async () => {
             await Object(_api_main__WEBPACK_IMPORTED_MODULE_3__["update"])();
             await this.update_ing();
-            this.$baseMessage('更新成功，6s后刷新页面', 'success');
-            setTimeout(() => {
-              window.location.reload();
-            }, 6000);
           });
         }
       }
