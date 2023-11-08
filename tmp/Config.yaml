@@ -4,7 +4,7 @@ CloseTime: 180                                       # 页面回收时间
 username: admin                                      # 管理员的username
 password: admin                                      # 管理员密码
 Title: QRabbit                                       # 标题
-mode: 2                                              # 公告
+mode: 2                                              # 模式
 ServerHost: 62.204.54.137:4566                       # 中心服务器host
 BotApiToken:                                         # 对接机器人的认证token
 WskeyCron: ''                                        # wskey的转换定时
@@ -20,3 +20,4 @@ AutoCaptchaCount: 5                                  # 滑动验证次数
 TJ_username:                                         # 图鉴的账号名
 TJ_password:                                         # 图鉴账号密码
 GitProxy:                                            # 拉库代理
+LoginProxy:                                          # 登录代理
